@@ -19,6 +19,15 @@ module Domain
       @_params = params
     end
 
+    def transaction
+      ActiveRecord::Base.transaction do
+        yield
+        true
+      rescue ActiveRecord::Rollback
+        false
+      end
+    end
+
     def create_params(*attr_names)
       {}.tap do |params|
         attr_names.each do |name|
