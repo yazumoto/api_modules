@@ -17,10 +17,11 @@ module ApiModules
       end
 
       def render_error(status:, type:, code: nil, params: nil)
-        render status: status, json: { type: type }.tap do |json|
+        response_json = { type: type }.tap do |json|
           json[:code] = code if code.present?
           json[:params] = params if params.present?
         end
+        render json: response_json, status: status
       end
 
       def unprocessable_entity(code: nil, params: nil)
