@@ -16,24 +16,26 @@ module ApiModules
         render json: error, status: status
       end
 
-      def render_error(status:, type:, code: nil)
-        render json: {type: type}.tap {|json| json[:code] = code if code.present?}, status: status
+      def render_error(status:, type:, code: nil, params: nil)
+        render status: status, json: { type: type }.tap do |json|
+          json[:code] = code if code.present?
+        end
       end
 
-      def unprocessable_entity(code)
+      def unprocessable_entity(code: nil, params: nil)
         render_error(status: :unprocessable_entity, type: 'invalid-request-error', code: code)
       end
 
-      def not_found(code)
-        render_error(status: :not_found, type: 'invalid-request-error', code: code)
+      def not_found(code: nil, params: nil)
+        render_error(status: :not_found, type: 'invalid-request-error', code: code, params: params)
       end
 
-      def unauthorized(code)
-        render_error(status: :unauthorized, type: 'authentication-error', code: code)
+      def unauthorized(code: nil, params: nil)
+        render_error(status: :unauthorized, type: 'authentication-error', code: code, params: params)
       end
 
-      def internal_server_error(code)
-        render_error(status: :internal_server_error, type: 'unexpected-error', code: code)
+      def internal_server_error(code: nil, params: nil)
+        render_error(status: :internal_server_error, type: 'unexpected-error', code: code, params: params)
       end
     end
   end
