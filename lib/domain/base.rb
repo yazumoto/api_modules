@@ -20,12 +20,11 @@ module Domain
     end
 
     def transaction
-      ActiveRecord::Base.transaction do
+      result = ActiveRecord::Base.transaction do
         yield
         true
-      rescue ActiveRecord::Rollback
-        false
       end
+      result || false
     end
 
     def create_params(*attr_names)
