@@ -27,6 +27,10 @@ module Domain
       result || false
     end
 
+    def save!
+      raise(ActiveRecord::Rollback) unless save
+    end
+
     def create_params(*attr_names)
       {}.tap do |params|
         attr_names.each do |name|
