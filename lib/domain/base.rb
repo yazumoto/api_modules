@@ -27,6 +27,10 @@ module Domain
       result || false
     end
 
+    def execute!
+      raise(ActiveRecord::Rollback) unless execute
+    end
+
     def save!
       raise(ActiveRecord::Rollback) unless save
     end
