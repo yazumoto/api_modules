@@ -17,7 +17,7 @@ module ApiModules
       end
 
       def _path
-        @path ||= @virtual_path.gsub(/#{LAST_TWO_PATH_ELEMENTS}/o, '')
+        @path ||= @virtual_path.gsub(/[^\/]*\/[^\/]*$/o, '')
       end
     end
   end
