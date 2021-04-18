@@ -57,18 +57,18 @@ module Domain
       update_data(data, options) || raise(ActiveRecord::Rollback)
     end
 
-    def save_data(data)
+    def save_data(data, error_prefix = nil)
       @_data = data
       if @_data.save
         true
       else
-        errors.add_model_error(@_data)
+        errors.add_model_error(@_data, error_prefix)
         false
       end
     end
 
-    def save_data!(data)
-      save_data(data) || raise(ActiveRecord::Rollback)
+    def save_data!(data, error_prefix = nil)
+      save_data(data, error_prefix) || raise(ActiveRecord::Rollback)
     end
 
     def set_errors(status: nil, type: nil, code: nil, params: nil)
