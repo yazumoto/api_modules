@@ -106,12 +106,11 @@ module Domain
       )
     end
 
-    def internal_server_error(code: nil, params: nil)
+    def internal_server_error(code: nil)
       set_errors(
         status: :internal_server_error,
         type: 'unexpected-error',
-        code: code,
-        params: params
+        code: code
       )
     end
 

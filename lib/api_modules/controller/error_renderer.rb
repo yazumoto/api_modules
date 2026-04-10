@@ -36,8 +36,8 @@ module ApiModules
         render_error(status: :unauthorized, type: 'authentication-error', code: code, params: params)
       end
 
-      def internal_server_error(code: nil, params: nil)
-        render_error(status: :internal_server_error, type: 'unexpected-error', code: code, params: params)
+      def internal_server_error(code: nil)
+        render_error(status: :internal_server_error, type: 'unexpected-error', code: code)
       end
     end
   end
